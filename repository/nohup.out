@@ -1,0 +1,222 @@
+69065:C 07 Feb 2022 16:21:13.691 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+69065:C 07 Feb 2022 16:21:13.691 # Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=69065, just started
+69065:C 07 Feb 2022 16:21:13.691 # Configuration loaded
+69065:M 07 Feb 2022 16:21:13.692 * Increased maximum number of open files to 10032 (it was originally set to 2560).
+69065:M 07 Feb 2022 16:21:13.692 * monotonic clock: POSIX clock_gettime
+69065:M 07 Feb 2022 16:21:13.694 * Running mode=standalone, port=6379.
+69065:M 07 Feb 2022 16:21:13.694 # Server initialized
+69065:M 07 Feb 2022 16:21:13.702 * Loading RDB produced by version 6.2.6
+69065:M 07 Feb 2022 16:21:13.702 * RDB age 412 seconds
+69065:M 07 Feb 2022 16:21:13.702 * RDB memory usage when created 0.97 Mb
+69065:M 07 Feb 2022 16:21:13.702 # Done loading RDB, keys loaded: 0, keys expired: 0.
+69065:M 07 Feb 2022 16:21:13.702 * DB loaded from disk: 0.008 seconds
+69065:M 07 Feb 2022 16:21:13.702 * Ready to accept connections
+Tue, 08 Feb 2022 00:21:14 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Error opening config file 'mongodb.conf': No such file or directory
+try 'mongod --help' for more information
+Tue, 08 Feb 2022 00:21:14 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Tue, 08 Feb 2022 00:21:14 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Tue, 08 Feb 2022 00:21:14 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Tue, 08 Feb 2022 00:21:14 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Tue, 08 Feb 2022 00:21:14 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+Express server listening on port 3000
+69065:signal-handler (1644280124) Received SIGTERM scheduling shutdown...
+69065:M 07 Feb 2022 16:28:44.638 # User requested shutdown...
+69065:M 07 Feb 2022 16:28:44.639 * Saving the final RDB snapshot before exiting.
+69065:M 07 Feb 2022 16:28:44.644 * DB saved on disk
+69065:M 07 Feb 2022 16:28:44.645 # Redis is now ready to exit, bye bye...
+86750:C 08 Feb 2022 10:18:01.114 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+86750:C 08 Feb 2022 10:18:01.117 # Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=86750, just started
+86750:C 08 Feb 2022 10:18:01.117 # Configuration loaded
+86750:M 08 Feb 2022 10:18:01.118 * Increased maximum number of open files to 10032 (it was originally set to 2560).
+86750:M 08 Feb 2022 10:18:01.118 * monotonic clock: POSIX clock_gettime
+86750:M 08 Feb 2022 10:18:01.118 # Warning: Could not create server TCP listening socket 127.0.0.1:6379: bind: Address already in use
+86750:M 08 Feb 2022 10:18:01.118 # Failed listening on port 6379 (TCP), aborting.
+{"t":{"$date":"2022-02-08T18:18:01.128Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log.2022-02-08T18-18-01"}}
+Failed to load c++ bson extension, using pure JS version
+Tue, 08 Feb 2022 18:18:01 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Tue, 08 Feb 2022 18:18:01 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Tue, 08 Feb 2022 18:18:01 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Tue, 08 Feb 2022 18:18:01 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Tue, 08 Feb 2022 18:18:01 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Tue, 08 Feb 2022 18:18:01 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+
+/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/pandemaniac-graphui/node_modules/mongodb/lib/mongodb/mongo_client.js:378
+          throw err
+          ^
+{ err: 'connection to [localhost:27017] timed out' }
+{"t":{"$date":"2022-02-08T19:58:14.719Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log.2022-02-08T19-58-14"}}
+Tue, 08 Feb 2022 19:58:15 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Tue, 08 Feb 2022 19:58:15 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Tue, 08 Feb 2022 19:58:15 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Tue, 08 Feb 2022 19:58:15 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Tue, 08 Feb 2022 19:58:15 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Tue, 08 Feb 2022 19:58:15 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+Express server listening on port 3000
+Transformers.markdown is deprecated, you must replace the :markdown jade filter, with :markdown and install jstransformer-markdown before you update to jade@2.0.0.
+(node:93115) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[0mGET / [36m304 [0m299.528 ms - -[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m3.568 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m2.075 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m3.657 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m2.523 ms - -[0m
+[0mGET /login [36m302 [0m2.782 ms - 46[0m
+[0mGET / [36m304 [0m1.724 ms - -[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m1.612 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m5.210 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m4.530 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m2.728 ms - -[0m
+[0mGET /login [36m302 [0m1.921 ms - 46[0m
+[0mGET / [36m304 [0m1.313 ms - -[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m1.795 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m3.754 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m3.187 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m2.938 ms - -[0m
+[0mGET /login [36m302 [0m2.558 ms - 46[0m
+[0mGET / [36m304 [0m3.505 ms - -[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m1.603 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m3.385 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m3.393 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m3.296 ms - -[0m
+[0mGET /login [36m302 [0m1.266 ms - 46[0m
+[0mGET / [36m304 [0m1.336 ms - -[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m1.601 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m1.473 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m3.114 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m2.995 ms - -[0m
+{"t":{"$date":"2022-02-10T00:26:23.248Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log.2022-02-10T00-26-23"}}
+Thu, 10 Feb 2022 00:26:23 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Thu, 10 Feb 2022 00:26:23 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Thu, 10 Feb 2022 00:26:23 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Thu, 10 Feb 2022 00:26:23 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Thu, 10 Feb 2022 00:26:23 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Thu, 10 Feb 2022 00:26:23 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+Express server listening on port 3000
+{"t":{"$date":"2022-02-10T01:33:08.195Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log.2022-02-10T01-33-08"}}
+Thu, 10 Feb 2022 01:33:08 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Thu, 10 Feb 2022 01:33:08 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Thu, 10 Feb 2022 01:33:08 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+NET 11601: createConnection [
+  { port: 6379, host: '127.0.0.1', family: 4 },
+  null,
+  [Symbol(normalizedArgs)]: true
+]
+NET 11601: pipe false undefined
+Thu, 10 Feb 2022 01:33:08 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Thu, 10 Feb 2022 01:33:08 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Thu, 10 Feb 2022 01:33:08 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+NET 11601: createConnection [
+  { port: 27017, host: 'localhost' },
+  null,
+  [Symbol(normalizedArgs)]: true
+]
+NET 11601: pipe false undefined
+NET 11601: connect: find host localhost
+NET 11601: connect: dns options { family: undefined, hints: 1024 }
+NET 11601: _read
+NET 11601: _read wait for connection
+NET 11601: _read
+NET 11601: _read wait for connection
+NET 11601: afterConnect
+NET 11601: _read
+NET 11601: Socket._handle.readStart
+NET 11601: _read
+NET 11601: afterConnect
+NET 11601: _read
+NET 11601: Socket._handle.readStart
+NET 11601: _read
+NET 11601: createConnection [
+  { port: 6379, host: '127.0.0.1', family: 4 },
+  null,
+  [Symbol(normalizedArgs)]: true
+]
+NET 11601: pipe false undefined
+NET 11601: setupListenHandle null 3000 4 0 undefined
+NET 11601: setupListenHandle: create a handle
+NET 11601: bind to ::
+NET 11601: _read
+NET 11601: _read wait for connection
+Express server listening on port 3000
+NET 11601: afterConnect
+NET 11601: _read
+NET 11601: Socket._handle.readStart
+NET 11601: _read
+NET 11601: _read
+{"t":{"$date":"2022-02-10T04:32:25.630Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log.2022-02-10T04-32-25"}}
+Thu, 10 Feb 2022 04:32:26 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Thu, 10 Feb 2022 04:32:26 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Thu, 10 Feb 2022 04:32:26 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Thu, 10 Feb 2022 04:32:26 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Thu, 10 Feb 2022 04:32:26 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Thu, 10 Feb 2022 04:32:26 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+node:events:371
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1315:16)
+    at listenInCluster (node:net:1363:12)
+    at Server.listen (node:net:1450:7)
+    at /Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/pandemaniac-graphui/app.js:125:26
+    at /Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/pandemaniac-graphui/config/mongo.js:18:12
+    at connectCallback (/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/pandemaniac-graphui/node_modules/mongodb/lib/mongo_client.js:527:5)
+    at /Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/pandemaniac-graphui/node_modules/mongodb/lib/mongo_client.js:430:11
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1342:8)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+{"t":{"$date":"2022-02-10T04:41:41.237Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_repo/logs/mongodb.log.2022-02-10T04-41-41"}}
+Thu, 10 Feb 2022 04:41:41 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Thu, 10 Feb 2022 04:41:41 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Thu, 10 Feb 2022 04:41:41 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Thu, 10 Feb 2022 04:41:41 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Thu, 10 Feb 2022 04:41:41 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Thu, 10 Feb 2022 04:41:41 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+help
+Express server listening on port 3000
+Transformers.markdown is deprecated, you must replace the :markdown jade filter, with :markdown and install jstransformer-markdown before you update to jade@2.0.0.
+(node:16543) [DEP0066] DeprecationWarning: OutgoingMessage.prototype._headers is deprecated
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[0mGET / [32m200 [0m262.492 ms - 2868[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m3.441 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m4.493 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m3.655 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m3.040 ms - -[0m
+[0mGET / [36m304 [0m2.294 ms - -[0m
+[0mGET /css/bootstrap-theme-3.0.3.min.css [36m304 [0m5.965 ms - -[0m
+[0mGET /css/spacer.css [36m304 [0m5.318 ms - -[0m
+[0mGET /css/bootstrap-3.0.3.min.css [36m304 [0m4.816 ms - -[0m
+[0mGET /js/bootstrap-3.0.3.min.js [36m304 [0m4.970 ms - -[0m
+{"t":{"$date":"2022-02-11T20:31:56.513Z"},"s":"I",  "c":"CONTROL",  "id":20697,   "ctx":"-","msg":"Renamed existing log file","attr":{"oldLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_reborn/repository/logs/mongodb.log","newLogPath":"/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_reborn/repository/logs/mongodb.log.2022-02-11T20-31-56"}}
+Fri, 11 Feb 2022 20:31:56 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:26:5
+Fri, 11 Feb 2022 20:31:56 GMT connect deprecated multipart: use parser (multiparty, busboy, formidable) npm module instead at node_modules/connect/lib/middleware/bodyParser.js:56:20
+Fri, 11 Feb 2022 20:31:56 GMT connect deprecated limit: Restrict request size at location of read at node_modules/connect/lib/middleware/multipart.js:86:15
+Fri, 11 Feb 2022 20:31:56 GMT connect deprecated methodOverride: use method-override npm module instead at app.js:35:19
+Fri, 11 Feb 2022 20:31:56 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:62:5
+Fri, 11 Feb 2022 20:31:56 GMT express deprecated app.configure: Check app.get('env') in an if statement at app.js:67:5
+node:events:371
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: connect ECONNREFUSED 127.0.0.1:6379
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1142:16)
+Emitted 'error' event on RedisClient instance at:
+    at RedisClient.on_error (/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_reborn/repository/pandemaniac-graphui/node_modules/redis/index.js:341:14)
+    at Socket.<anonymous> (/Users/rosita/coursework/2022winter/CS144_TA/pandemaniac_reborn/repository/pandemaniac-graphui/node_modules/redis/index.js:222:14)
+    at Socket.emit (node:events:394:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  errno: -61,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 6379
+}

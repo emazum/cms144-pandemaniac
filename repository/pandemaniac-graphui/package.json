@@ -1,0 +1,30 @@
+{
+  "name": "pandemaniac-graphui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.4.7",
+    "connect-flash": "0.1.x",
+    "connect-redis": "^1.4.1",
+    "d3": "^3.5.17",
+    "d3-node": "^2.2.3",
+    "express": "^3.21.2",
+    "express-session": "*",
+    "jade": "1.11.x",
+    "line-reader": "0.4.x",
+    "markdown": "0.5.x",
+    "mongodb": "^2.2.36",
+    "passport": "0.5.x",
+    "passport-local": "1.0.x",
+    "redis": "^3.0.1",
+    "underscore": "1.13.x"
+  },
+  "description": "pandemaniac-graphui ===================",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC"
+}

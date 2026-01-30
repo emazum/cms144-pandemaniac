@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+  .container
+    ul.nav.nav-pills
+      each link in active
+        li: div
+          .spacer5
+          if link.downloaded
+            if link.uploaded && link.expired
+              a.btn.btn-success(href='/submit/' + link.href)= link.text
+            else if link.uploaded && !link.expired
+              a.btn.btn-info(href='/submit/' + link.href)= link.text
+            else if !link.uploaded && link.expired
+              a.btn.btn-danger(href='/submit/' + link.href)= link.text
+            else if !link.uploaded && !link.expired
+              a.btn.btn-warning(href='/submit/' + link.href)= link.text
+          else if !link.expired
+            a.btn.btn-default(href='/submit/' + link.href)= link.text
+          else
+            a.btn.btn-link(href='/submit/' + link.href)= link.text
+          .spacer5
+    .spacer15
+    p
+      span.label.label-success x.y.z
+      |  indicates that at least one successful submission was made,
+      |  and the timer has expired.
+    p
+      span.label.label-info x.y.z
+      |  indicates that at least one successful submission has been made,
+      |  and the timer has yet to expire.
+    p
+      span.label.label-danger x.y.z
+      |  indicates that no successful submission was made,
+      |  and the timer has expired.
+    p
+      span.label.label-warning x.y.z
+      |  indicates that no successful submission has been made,
+      |  and the timer has yet to expire.
+    p
+      span.label.label-default x.y.z
+      |  indicates that the graph has not been attempted yet.
+    p
+      span.label: a x.y.z
+      |  indicates that the graph was not attempted,
+      |  but can still be downloaded.
