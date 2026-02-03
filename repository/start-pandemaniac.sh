@@ -1,3 +1,9 @@
+mkdir logs
+mkdir -p data/db
+mkdir -p pandemaniac-graphui/private/runs
+mkdir -p pandemaniac-graphui/private/uploads
+mkdir -p pandemaniac-graphui/public/download
+
 redis-server redis.conf &
 echo $! > redis-server.pid
 
@@ -7,6 +13,6 @@ echo $! > mongod.pid
 # Need to change directories so that relative path is correct
 cd pandemaniac-graphui
 NODE_ENV=production node app.js &
-#NODE_DEBUG=cluster,net,http,fs,tls,timers node app.js &
+
 cd ../
 echo $! > node.pid

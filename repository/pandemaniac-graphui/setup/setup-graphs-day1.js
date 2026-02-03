@@ -1,6 +1,6 @@
 var category = "day1"
-  , start = ISODate("2026-02-09T03:00:00.000-08:00")
-  , end = ISODate("2026-02-09T23:59:59.000-08:00");
+  , start = ISODate("2026-02-03T03:00:00.000-08:00")
+  , end = ISODate("2026-02-03T23:59:59.000-08:00");
 
 // NOTE: variables `minute` and `descriptions` defined in setup-graphs.js
 

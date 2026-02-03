@@ -1,12 +1,14 @@
-rm -f pandemaniac-graphui/private/runs/*
-mkdir pandemaniac-graphui/public/download/
-find pandemaniac-graphui/private/uploads -mindepth 1 -maxdepth 1 -type d \
-				         -exec rm -rf '{}' +
+rm -rf pandemaniac-graphui/private/runs
+mkdir pandemaniac-graphui/private/runs
+rm -rf pandemaniac-graphui/private/uploads
+mkdir pandemaniac-graphui/private/uploads
+rm -f pandemaniac-graphui/public/download/*
 
-source copy-ta-graphs.sh
+dir=pandemaniac-graphui/private/uploads
+cp -r ta/submissions/* ${dir}
 
-mongo localhost:27017/test --eval "db.teams.drop()"
-mongo localhost:27017/test --eval "db.attempts.drop()"
-mongo localhost:27017/test --eval "db.runs.drop()"
-mongo localhost:27017/test pandemaniac-graphui/setup/setup-graphs.js
-mongo localhost:27017/test pandemaniac-graphui/setup/ensure-indices.js
+find ${dir} -type d -exec chmod 770 {} +
+find ${dir} -type f -exec chmod 660 {} +
+
+
+mongosh localhost:27017/pandemaniac pandemaniac-graphui/setup/full-setup.js
