@@ -1,0 +1,5 @@
+Majority All (includes uncolored)
+Majority Colored
+Most Common Colored
+Random P - each neighbor has probability p, if more than 1, stays unchanged
+Weighted Random (proportional to neighbor colors)

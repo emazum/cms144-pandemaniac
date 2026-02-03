@@ -3,28 +3,30 @@
  * Module dependencies.
  */
 
-var fs = require('fs')
+const fs = require('fs')
+  , csv = require('csv-parser')
   , path = require('path');
 
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 
-module.exports = exports = function(db) {
+module.exports = exports = function (db) {
   return (
-    { register: function(req, res) {
-        var warn = res.locals.warn;
+    {
+      register: function (req, res) {
+        let warn = res.locals.warn;
 
         warn.push('Password is transmitted in plain-text!');
         res.render('team/register', { warn: warn });
       }
 
-    , doRegister: function(req, res, next) {
-        var username = req.body.username
+      , doRegister: async function (req, res, next) {
+        let username = req.body.username
           , password = req.body.password;
 
         delete req.body.password;
 
         // Check whether username and password fields are valid
-        var checkUsername = verifyUsername(username)
+        let checkUsername = await verifyUsername(username)
           , checkPassword = verifyPassword(password);
 
         if (!checkUsername.isValid) {
@@ -36,22 +38,21 @@ module.exports = exports = function(db) {
         }
 
         if (!checkUsername.isValid || !checkPassword.isValid) {
-          return res.redirect('/register');
+          return res.redirect('/register-hidden');
         }
 
         // Create the team record and insert it into the database
-        makeTeam(username, password, function(err, team) {
+        makeTeam(username, password, function (err, team) {
           if (err) {
             return next(err);
           }
-
           var teams = db.collection('teams');
 
-          teams.insert(team, { safe: true }, function(err, docs) {
+          teams.insertOne(team, { safe: true }, function (err, docs) {
             // Check for duplicate username
             if (err && err.code === 11000) {
               req.flash('error', 'Team %s is already taken.', username);
-              return res.redirect('/register');
+              return res.redirect('/register-hidden');
             }
 
             // Some other kind of error
@@ -62,20 +63,25 @@ module.exports = exports = function(db) {
             // Make directory for submissions
             // TODO: handle case where inserting team into database
             //       succeeds, but creating folder fails
-            var dir = path.join('private', 'uploads', team.name);
-            fs.mkdir(dir, 0755, function(err) {
+            if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+              var dir = path.join('private', 'uploads', team.name);
+            } else {
+              var dir = path.join('test', 'uploads', team.name);
+            }
+
+            fs.mkdir(dir, { recursive: true }, function (err) {
               if (err) {
                 return next(err);
               }
 
               // Log the team in after registration completes
-              req.login(team, function(err) {
+              req.login(team, function (err) {
                 if (err) {
                   return next(err);
                 }
 
                 req.flash('log', 'Successfully registered as team %s.'
-                               , team.name);
+                  , team.name);
                 return res.redirect('/');
               });
             });
@@ -88,14 +94,24 @@ module.exports = exports = function(db) {
 };
 
 /**
- * Validates the username field, ensures the following.
- *
- *   - at least 4 characters long
- *   - at most 20 characters long
- *   - contains only alphanumeric characters
- */
-function verifyUsername(field) {
-  var res = { isValid: true };
+* Validates the username field, ensures the following.
+*
+*   - at least 4 characters long
+*   - at most 20 characters long
+*   - contains only alphanumeric characters
+*   - does not contain some special names
+*/
+async function verifyUsername(field) {
+  let disallowedNames = new Set();
+  const parser = csv();
+  fs.createReadStream('config/disallowed_username.csv')
+    .pipe(parser);
+
+  for await (const data of parser) {
+    disallowedNames.add(data[".json"])
+  }
+
+  let res = { isValid: true };
 
   if (field.length < 4) {
     res.isValid = false;
@@ -106,16 +122,19 @@ function verifyUsername(field) {
   } else if (!/^\w+$/.test(field)) {
     res.isValid = false;
     res.message = 'Team name must contain only alphanumeric characters.';
+  } else if (disallowedNames.has(String(field))) {
+    res.isValid = false;
+    res.message = 'Team name cannot be ' + field;
   }
 
   return res;
 };
 
 /**
- * Validates the password field, ensures the following.
- *
- *   - at least 4 characters long
- */
+* Validates the password field, ensures the following.
+*
+*   - at least 4 characters long
+*/
 function verifyPassword(field) {
   var res = { isValid: true };
 
@@ -128,24 +147,22 @@ function verifyPassword(field) {
 };
 
 /**
- * Constructs a team document of the following form.
- *   { name: ..., hash: ... }
- *
- * username = string
- * password = string
- * callback = function(error, result)
- */
+* Constructs a team document of the following form.
+*   { name: ..., hash: ... }
+*
+* username = string
+* password = string
+* callback = function(error, result)
+*/
 function makeTeam(username, password, callback) {
-  bcrypt.genSalt(10, function(err, salt) {
+  bcrypt.genSalt(10, function (err, salt) {
     if (err) {
       return callback(err);
     }
-
-    bcrypt.hash(password, salt, null, function(err, crypted) {
+    bcrypt.hash(password, salt, function (err, crypted) {
       if (err) {
         return callback(err);
       }
-
       var team = { name: username, hash: crypted };
 
       return callback(null, team);

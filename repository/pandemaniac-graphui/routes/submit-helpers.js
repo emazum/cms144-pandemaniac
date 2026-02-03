@@ -3,12 +3,13 @@
  * Module dependencies.
  */
 
-module.exports = exports = function(db) {
+module.exports = exports = function (db) {
   return (
-    { verifyName: function(graph, callback) {
+    {
+      verifyName: function (graph, callback) {
         // Check that graph name is in a proper format and extract its
         // semantic meaning, i.e. num_players . num_seeds . unique_id
-        var match = /^(\d+)\.(\d+)\.(\d+)$/.exec(graph);
+        var match = /.*\.(\d+)\.(\d+)$/.exec(graph);
 
         if (!match) {
           return callback(null, false);
@@ -18,7 +19,7 @@ module.exports = exports = function(db) {
           , query = { name: graph, start: { $lt: now } };
 
         var graphs = db.collection('graphs');
-        graphs.findOne(query, function(err, doc) {
+        graphs.findOne(query, function (err, doc) {
           if (err) {
             return callback(err);
           }
@@ -30,16 +31,18 @@ module.exports = exports = function(db) {
 
           // Can always download graphs, but can only upload if has not
           // past the end time
-          callback(null, { graph: doc
-                         , numPlayers: +match[1]
-                         , numSeeds: +match[2]
-                         , canDownload: true
-                         , canUpload: doc.end > now
-                         });
+          callback(null, {
+            graph: doc
+            , numPlayers: +match[1]
+            , numNodes: doc.numNodes
+            , numSeeds: +match[1]
+            , canDownload: true
+            , canUpload: doc.end > now
+          });
         });
       }
 
-    , makeKey: function(graph, team) {
+      , makeKey: function (graph, team) {
         return graph + '+' + team;
       }
 

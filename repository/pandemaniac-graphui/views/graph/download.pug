@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .container
+    - var jOffset = 0
+    #results.panel-group
+      each category in categories
+        .panel.panel-default
+          .panel-heading(data-toggle='collapse',
+                data-parent='#results',
+                href='#' + category.name,
+                role="button").cursor-pointer
+            h3.panel-title
+              a= category.name
+          .panel-collapse.collapse(id=category.name)
+            table.table.table-striped.table-bordered
+              thead
+                tr
+                  th
+                  each graph in category.graphs
+                    th= graph
+              tbody
+                each row, i in matrix
+                  - var j = jOffset
+                  tr
+                    td= teams[i]
+                    each graph in category.graphs
+                      - var col = matrix[i][j]
+                      td
+                        if col
+                            - var file = graph + '-' + teams[i] + '.json'
+                            a(href='/download/' + file download=file) link
+                      - j++
+          - jOffset += category.graphs.length
+
+append js
+  script(src='/js/load-tooltips.js')

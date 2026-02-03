@@ -10,7 +10,7 @@ var index = require('./submit-index')
 
 var _ = require('underscore');
 
-module.exports = exports = function(db, client) {
+module.exports = exports = function (db, client) {
   index = index(db, client);
   list = list(db, client);
   download = download(db, client);

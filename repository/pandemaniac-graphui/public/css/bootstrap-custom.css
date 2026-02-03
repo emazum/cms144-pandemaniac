@@ -1,0 +1,102 @@
+.cursor-alias {cursor: alias;}
+.cursor-all-scroll {cursor: all-scroll;}
+.cursor-auto {cursor: auto;}
+.cursor-cell {cursor: cell;}
+.cursor-context-menu {cursor: context-menu;}
+.cursor-col-resize {cursor: col-resize;}
+.cursor-copy {cursor: copy;}
+.cursor-crosshair {cursor: crosshair;}
+.cursor-default {cursor: default;}
+.cursor-e-resize {cursor: e-resize;}
+.cursor-ew-resize {cursor: ew-resize;}
+.cursor-grab {cursor: -webkit-grab; cursor: grab;}
+.cursor-grabbing {cursor: -webkit-grabbing; cursor: grabbing;}
+.cursor-help {cursor: help;}
+.cursor-move {cursor: move;}
+.cursor-n-resize {cursor: n-resize;}
+.cursor-ne-resize {cursor: ne-resize;}
+.cursor-nesw-resize {cursor: nesw-resize;}
+.cursor-ns-resize {cursor: ns-resize;}
+.cursor-nw-resize {cursor: nw-resize;}
+.cursor-nwse-resize {cursor: nwse-resize;}
+.cursor-no-drop {cursor: no-drop;}
+.cursor-none {cursor: none;}
+.cursor-not-allowed {cursor: not-allowed;}
+.cursor-pointer {cursor: pointer;}
+.cursor-progress {cursor: progress;}
+.cursor-row-resize {cursor: row-resize;}
+.cursor-s-resize {cursor: s-resize;}
+.cursor-se-resize {cursor: se-resize;}
+.cursor-sw-resize {cursor: sw-resize;}
+.cursor-text {cursor: text;}
+.cursor-w-resize {cursor: w-resize;}
+.cursor-wait {cursor: wait;}
+.cursor-zoom-in {cursor: zoom-in;}
+.cursor-zoom-out {cursor: zoom-out;}
+
+div.tooltip {
+    position: absolute;
+    background-color: white;
+    max-width: 200px;
+    height: auto;
+    padding: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+
+.dropdown-menu {
+    min-width: min-content;
+    padding: 0px 0px;
+}
+
+.input-group-btn:first-child>.btn {
+  margin-right: -4px;
+}
+
+.btn:focus, .btn:active {
+  outline: none !important;
+}
+
+.scrollable-menu {
+  max-height: 100px;
+  height: auto;
+  overflow-x: hidden;
+}
+
+.scrollable-menu li {
+  font-size: 12px;
+}
+
+.scrollable-menu li a {
+  padding: 3px 13px;
+}
+
+.tooltip p {
+  margin: 0;
+}
+
+.tooltip ul {
+  margin: 0;
+  padding-left: 12pt;
+}
+
+#legend .selected {
+  background-color: rgba(175, 175, 175, 0.5);
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+#instruction {
+  display: inline;
+  margin-right: 10px;
+}
+
+.video_link {
+  text-decoration: underline;
+}

@@ -1,0 +1,18 @@
+import os
+
+# Directory containing the files
+src_dir = "ta/2023/2023_graphs/SNAP"
+new_dir = "ta/2023_graphs/SNAP_sections"
+
+# Loop through all the files in the directory
+for filename in os.listdir(src_dir):
+    file_path = os.path.join(src_dir, filename)
+
+    # Skip if it's not a file
+    if not os.path.isfile(file_path):
+        continue
+
+    # Create a folder for the file
+    folder_path = os.path.join(new_dir, filename[:-5] + "_sections")
+    print(folder_path)
+    os.mkdir(folder_path)

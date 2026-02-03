@@ -3,15 +3,16 @@
  * Module dependencies.
  */
 
-module.exports = exports = function(passport) {
+module.exports = exports = function (passport) {
   return (
-    { login: function(req, res) {
-        var warn = [ 'Password is transmitted in plain-text!' ];
+    {
+      login: function (req, res) {
+        var warn = ['Password is transmitted in plain-text!'];
         res.render('team/login', { warn: warn });
       }
 
-    , doLogin: function(req, res) {
-        passport.authenticate('local', function(err, user, info) {
+      , doLogin: function (req, res) {
+        passport.authenticate('local', function (err, user, info) {
           if (err) {
             return next(err);
           }
@@ -22,7 +23,7 @@ module.exports = exports = function(passport) {
             return res.redirect('/login');
           }
 
-          req.login(user, function(err) {
+          req.login(user, function (err) {
             if (err) {
               return next(err);
             }
@@ -33,10 +34,14 @@ module.exports = exports = function(passport) {
         })(req, res);
       }
 
-    , logout: function(req, res) {
-        req.logout();
-        req.flash('log', 'Successfully logged out.');
-        res.redirect('/');
+      , logout: function (req, res) {
+        req.logout(function (err) {
+          if (err) {
+            return next(err);
+          }
+          req.flash('log', 'Successfully logged out.');
+          res.redirect('/');
+        });
       }
 
     }

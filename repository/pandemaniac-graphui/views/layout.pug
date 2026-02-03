@@ -1,0 +1,22 @@
+doctype 5
+html
+  head
+    title= title
+
+    block css
+      link(rel='stylesheet', href='/css/bootstrap-3.0.3.min.css')
+      link(rel='stylesheet', href='/css/bootstrap-theme-3.0.3.min.css')
+      link(rel='stylesheet', href='/css/spacer.css')
+      link(rel='stylesheet', href='/css/bootstrap-custom.css')
+  body
+    include header
+
+    include notify
+
+    block content
+
+    include footer
+
+    block js
+      script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+      script(src='/js/bootstrap-3.0.3.min.js')

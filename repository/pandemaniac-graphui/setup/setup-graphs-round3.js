@@ -1,78 +1,51 @@
 var category = "round3"
-  , start = ISODate("2022-02-27T08:00:00.000Z")
-  , end = ISODate("2022-02-28T08:00:00.000Z");
+  , start = ISODate("2026-02-02T03:00:00.000-08:00")
+  , end = ISODate("2026-02-02T23:59:59.000-08:00");
 
 // NOTE: variables `minute` and `descriptions` defined in setup-graphs.js
 
-db.graphs.insert({
-  name: "16.10.7"
-, category: category
-, file: "16.10.7.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.17"
+  , category: category
+  , file: "RR.10.17.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.ER
 });
-db.graphs.insert({
-  name: "16.10.8"
-, category: category
-, file: "16.10.8.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.27"
+  , category: category
+  , file: "RR.10.27.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.PA
 });
-db.graphs.insert({
-  name: "16.10.9"
-, category: category
-, file: "16.10.9.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.37"
+  , category: category
+  , file: "RR.10.37.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.SSBM
 });
-db.graphs.insert({
-  name: "8.10.9"
-, category: category
-, file: "8.10.6.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.15.47"
+  , category: category
+  , file: "RR.15.47.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.Caltech
 });
-db.graphs.insert({
-  name: "8.20.B"
-, category: category
-, file: "8.20.B.json"
-, timeout: minute * 5
-, start: start
-, end: end
-});
-db.graphs.insert({
-  name: "8.20.C"
-, category: category
-, file: "8.20.C.json"
-, timeout: minute * 5
-, start: start
-, end: end
-});
-db.graphs.insert({
-  name: "4.10.A"
-, category: category
-, file: "4.10.A.json"
-, timeout: minute * 3
-, start: start
-, end: end
-});
-db.graphs.insert({
-  name: "4.20.3"
-, category: category
-, file: "4.20.3.json"
-, timeout: minute * 3
-, start: start
-, end: end
-});
-db.graphs.insert({
-  name: "4.20.4"
-, category: category
-, file: "4.20.4.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.57"
+  , category: category
+  , file: "RR.10.57.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.SNAP
 });

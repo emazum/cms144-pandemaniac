@@ -8,9 +8,10 @@ var fs = require('fs')
 
 var mongo = ObjectID = require('mongodb').ObjectID
 
-module.exports = exports = function(db) {
+module.exports = exports = function (db) {
   return (
-    { layout: function(req, res) {
+    {
+      layout: function (req, res) {
         var id = req.params.id
           , query;
 
@@ -21,7 +22,7 @@ module.exports = exports = function(db) {
         }
 
         var runs = db.collection('runs');
-        runs.findOne(query, function(err, doc) {
+        runs.findOne(query, function (err, doc) {
           if (err) {
             return res.json(500);
           }
@@ -31,13 +32,13 @@ module.exports = exports = function(db) {
           }
 
           var graphs = db.collection('graphs');
-          graphs.findOne({ name: doc.graph }, function(err, doc) {
+          graphs.findOne({ name: doc.graph }, function (err, doc) {
             if (err) {
               return res.json(500);
             }
 
             var pathname = path.join('private', 'layouts', doc.file);
-            fs.readFile(pathname, { encoding: 'utf8' }, function(err, data) {
+            fs.readFile(pathname, { encoding: 'utf8' }, function (err, data) {
               if (err) {
                 return res.json(500);
               }

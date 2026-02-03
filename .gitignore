@@ -1,2 +1,3 @@
 repository/data/db/*
 repository/logs/*
+repository/pandemaniac-graphui/node_modules/*

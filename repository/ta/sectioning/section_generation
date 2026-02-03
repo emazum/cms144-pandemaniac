@@ -1,0 +1,128 @@
+import networkx as nx
+import numpy as np
+import json
+from sklearn.cluster import KMeans, SpectralClustering
+import os
+from scipy.spatial.distance import cdist
+from scipy.optimize import linear_sum_assignment
+from networkx.algorithms import community
+
+
+
+# Directory containing the files
+src_dir = "ta/2023/2023_graphs/SNAP"
+new_dir = "ta/2023_graphs/SNAP_sections"
+
+# Loop through all the files in the directory
+for filename in os.listdir(src_dir):
+    file_path = os.path.join(src_dir, filename)
+
+    # Skip if it's not a file
+    if not os.path.isfile(file_path):
+        continue
+
+    # if filename == "J.35.34.json":
+    #     print("skipping")
+    #     continue
+
+    with open(file_path, 'r') as j:
+            graph = json.loads(j.read())
+
+    G = nx.Graph(graph)
+    G = nx.relabel.convert_node_labels_to_integers(G)
+
+    num_nodes = len(G.nodes)
+    n_clusters = 10
+    print("There are " + str(num_nodes) + " nodes in " + filename[:-5] + " graph." )
+
+
+    # Cluster the graph using KMeans
+    A = nx.to_numpy_array(G) # Get the adjacency matrix of the graph
+    kmeans = KMeans(n_clusters, n_init=10)
+    kmeans.fit(A)
+    clusters = kmeans.labels_
+
+# Try to get even clusters:
+    # def get_even_clusters(X, cluster_size):
+    #     n_clusters = int(np.ceil(len(X)/cluster_size))
+    #     A = nx.to_numpy_array(X) # Get the adjacency matrix of the graph
+    #     kmeans = KMeans(n_clusters, n_init=5)
+    #     kmeans.fit(A)
+    #     centers = kmeans.cluster_centers_
+    #     centers = centers.reshape(-1, 1, A.shape[-1]).repeat(cluster_size, 1).reshape(-1, A.shape[-1])
+    #     distance_matrix = cdist(A, centers)
+    #     clusters = linear_sum_assignment(distance_matrix)[1]//cluster_size
+    #     return clusters
+
+    
+    # clusters = get_even_clusters(G, num_nodes/n_clusters)
+
+
+    # Use SpectralClustering to cluster the graph into 10 clusters
+    # A = nx.adjacency_matrix(G).toarray()
+    # model = SpectralClustering(n_clusters)
+    # clusters = model.fit_predict(A)
+
+    # # Find the communities using the Louvain method
+    # communities = community.greedy_modularity_communities(G)
+
+    # # Filter the communities to only include those with more than the minimum number of nodes
+    # min_nodes = 0 #num_nodes * .04
+    # clusters = [c for c in communities if len(c) >= min_nodes]
+
+
+    # Apply the Louvain Method
+    # partition = community.best_partition(G)
+
+    # # Create a dictionary of clusters
+    # clusters = {}
+    # for node, cluster_id in partition.items():
+    #     if cluster_id not in clusters:
+    #         clusters[cluster_id] = []
+    #     clusters[cluster_id].append(node)
+    
+    # print(clusters)
+
+    
+
+
+    # Get the nodes in each cluster
+    cluster_nodes = {}
+    for i, cluster in enumerate(clusters):
+        if cluster not in cluster_nodes:
+            cluster_nodes[cluster] = []
+        cluster_nodes[cluster].append(list(G.nodes)[i])
+
+# find max cluster
+    maximum_cluster = -1
+    max_cluster_size = 0
+    for i, nodes in cluster_nodes.items():
+        if len(nodes) >= max_cluster_size:
+            maximum_cluster = i
+            max_cluster_size = len(nodes)
+    
+    print("The maximum cluster is section " + str(maximum_cluster) + " and it has " + str(max_cluster_size) + " nodes.")
+
+    # pruning
+
+    minimum_nodes = int(.07 * num_nodes)
+    for i, nodes in cluster_nodes.items():
+        if len(nodes) < minimum_nodes:
+            temp = cluster_nodes[maximum_cluster][:minimum_nodes]
+            nodes.extend(temp)
+            cluster_nodes[maximum_cluster] = cluster_nodes[maximum_cluster][minimum_nodes:]
+             
+
+
+
+
+
+    # Write the nodes in each cluster to a separate text file
+    for i, nodes in cluster_nodes.items():
+        folder_path = os.path.join(new_dir, filename[:-5] + "_sections", "section_{}.txt".format(i))
+        print("Section " + str(i) + " contains: " + str(len(nodes)))
+        with open(folder_path, "w") as f:
+            for node in nodes:
+                f.write("{}\n".format(node))
+
+

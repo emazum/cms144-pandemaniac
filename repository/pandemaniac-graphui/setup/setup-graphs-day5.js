@@ -1,89 +1,78 @@
 var category = "day5"
-  , start = ISODate("2015-02-24T00:00:00.000Z")
-  , end = ISODate("2015-02-25T00:00:00.000Z");
+  , start = ISODate("2026-02-02T03:00:00.000-08:00")
+  , end = ISODate("2026-02-02T23:59:59.000-08:00");
 
 // NOTE: variables `minute` and `descriptions` defined in setup-graphs.js
 
-db.graphs.insert({
-  name: "2.5.5"
-, category: category
-, file: "2.5.5.json"
-, timeout: minute * 3
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.14"
+  , category: category
+  , file: "RR.10.14.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.ER
 });
-db.graphs.insert({
-  name: "4.5.5"
-, category: category
-, file: "4.5.5.json"
-, timeout: minute * 3
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.24"
+  , category: category
+  , file: "RR.10.24.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.PA
 });
-db.graphs.insert({
-  name: "4.10.5"
-, category: category
-, file: "4.10.5.json"
-, timeout: minute * 3
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "RR.10.34"
+  , category: category
+  , file: "RR.10.34.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.SSBM
 });
-db.graphs.insert({
-  name: "2.10.14"
-, category: category
-, file: "2.10.14.json"
-, timeout: minute * 5
-, start: start
-, end: end
-, desc: descriptions.degree
+db.graphs.insertOne({
+  name: "RR.15.44"
+  , category: category
+  , file: "RR.15.44.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.Caltech
 });
-db.graphs.insert({
-  name: "2.10.24"
-, category: category
-, file: "2.10.24.json"
-, timeout: minute * 5
-, start: start
-, end: end
-, desc: descriptions.fewer
+db.graphs.insertOne({
+  name: "RR.10.54"
+  , category: category
+  , file: "RR.10.54.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.SNAP
 });
-db.graphs.insert({
-  name: "2.10.34"
-, category: category
-, file: "2.10.34.json"
-, timeout: minute * 5
-, start: start
-, end: end
-, desc: descriptions.more
+db.graphs.insertOne({
+  name: "J.15.14"
+  , category: category
+  , file: "J.15.14.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.SSBM
 });
-db.graphs.insert({
-  name: "8.10.5"
-, category: category
-, file: "8.10.5.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "J.10.24"
+  , category: category
+  , file: "J.10.24.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.Caltech
 });
-db.graphs.insert({
-  name: "8.20.6"
-, category: category
-, file: "8.20.6.json"
-, timeout: minute * 5
-, start: start
-, end: end
-});
-db.graphs.insert({
-  name: "8.20.7"
-, category: category
-, file: "8.20.7.json"
-, timeout: minute * 5
-, start: start
-, end: end
-});
-db.graphs.insert({
-  name: "8.35.3"
-, category: category
-, file: "8.35.3.json"
-, timeout: minute * 5
-, start: start
-, end: end
+db.graphs.insertOne({
+  name: "J.35.34"
+  , category: category
+  , file: "J.35.34.json"
+  , timeout: minute * 5
+  , start: start
+  , end: end
+  , desc: descriptions.SNAP
 });

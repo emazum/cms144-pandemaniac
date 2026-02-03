@@ -1,0 +1,13 @@
+.container
+  .spacer20
+  ul.nav.nav-pills.pull-left
+    li: a(href='/') Home
+    li: a(href='/submit') Submit
+    li: a(href='/graph') Results
+    li: a(href='/graph/download') Strategies
+    if user
+      li: a(href='/logout') Logout
+    else
+      li: a(href='/login') Login
+  .spacer10
+  p.pull-right.text-muted CS 144 | California Institute of Technology

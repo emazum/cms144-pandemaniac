@@ -8,16 +8,17 @@ var fs = require('fs')
 
 var helpers = require('./submit-helpers');
 
-module.exports = exports = function(db, client) {
+module.exports = exports = function (db, client) {
   helpers = helpers(db);
 
   return (
-    { download: function(req, res, next) {
+    {
+      download: function (req, res, next) {
         var graph = req.params.id
           , filename = req.query.file || graph + '.json';
 
         // Check that the graph name is valid
-        helpers.verifyName(graph, function(err, found) {
+        helpers.verifyName(graph, function (err, found) {
           if (err) {
             return next(err);
           }
@@ -28,17 +29,15 @@ module.exports = exports = function(db, client) {
 
           // Check that the graph file exists
           var pathname = path.join('private', 'graphs', found.graph.file);
-          fs.exists(pathname, function(exists) {
+          fs.exists(pathname, function (exists) {
             if (!exists) {
               return res.status(500).render('500');
             }
-
             // Send the file
-            res.download(pathname, filename, function(err) {
+            res.download(pathname, filename, function (err) {
               if (err) {
                 return next(err);
               }
-
               // Start the clock, i.e. set the timer,
               // only necessary if can actually upload a submission
               if (found.canUpload) {
@@ -68,25 +67,24 @@ module.exports = exports = function(db, client) {
 function recordDownload(db, client, graph, team, expire, next) {
   // Check whether has already submitted
   var query = { team: team, graph: graph }
-    , sort = []
     , update = { $setOnInsert: query }
     , options = { safe: true, upsert: true, new: false };
 
   var attempts = db.collection('attempts');
-  attempts.findAndModify(query, sort, update, options, function(err, doc) {
+  attempts.findOneAndUpdate(query, update, options, function (err, doc) {
     if (err) {
       return next(err);
     }
 
-    // Note that collection.findAndModify(...) returns `{}`
-    // when document was not present, instead of `null`
-    if (!doc._id) {
+    // If key not in attempts, create redis key with timer.
+    if (doc.value == null) {
       // Set key to expire with timeout only if does not already exist
       var key = helpers.makeKey(graph, team);
-      client.set(key, true, 'EX', expire, 'NX', function(err) {
+      client.set(key, "true", function (err, reply) {
         if (err) {
           return next(err);
         }
+        client.expire(key, expire);
       });
     }
   });

@@ -1,0 +1,54 @@
+extends ../layout
+
+block content
+  .container
+    - var jOffset = 0
+    #results.panel-group
+      each category in categories
+        .panel.panel-default
+          .panel-heading(data-toggle='collapse',
+                data-parent='#results',
+                href='#' + category.name,
+                role="button").cursor-pointer
+            h3.panel-title
+              a= category.name
+          .panel-collapse.collapse(id=category.name)
+            table.table.table-striped.table-bordered
+              thead
+                tr
+                  th
+                  each graph in category.graphs
+                    th= graph
+              tbody
+                each row, i in matrix
+                  - var j = jOffset
+                  tr
+                    td= teams[i]
+                    each graph in category.graphs
+                      - var col = matrix[i][j]
+                      td
+                        - var wins = 0
+                        - var losses = 0
+                        if col
+                          each entry, k in col
+                            - var win_status = 'L '
+                            if entry.score == 20
+                              - wins += 1
+                              - win_status = 'W '
+                            else
+                              - losses += 1
+                            if k !== 0 && k % 4 == 0
+                              br
+                            - var teamsList = entry.teams.join(' ')
+                            a(href='/graph/' + entry.id,
+                              data-toggle='popover',
+                              data-placement='top',
+                              data-teams-list=teamsList)= win_status
+                          if graph.charAt(0) == 'R'
+                            br
+                            =String(wins) + '-' + String(losses)
+                      - j++
+          - jOffset += category.graphs.length
+
+append js
+  script(src='/js/load-tooltips.js')

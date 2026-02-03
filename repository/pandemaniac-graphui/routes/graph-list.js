@@ -3,21 +3,23 @@
  * Module dependencies.
  */
 
-module.exports = exports = function(db) {
+const team = require("./team");
+
+module.exports = exports = function (db) {
   return (
-    { index: function(req, res) {
+    {
+      index: function (req, res) {
         return res.render('graph/graph');
       }
 
-    , list: function(req, res, next) {
+      , list: function (req, res, next) {
         // Get all teams
-        findAllTeams(db, function(err, teams) {
+        findAllTeams(db, function (err, teams) {
           if (err) {
             return next(err);
           }
-
           // Get all graphs, grouped by category
-          getAllCategories(db, function(err, categories) {
+          getAllCategories(db, function (err, categories) {
             if (err) {
               return next(err);
             }
@@ -30,48 +32,12 @@ module.exports = exports = function(db) {
             // Initialize empty matrix number of teams by number of graphs
             var matrix = prepareMatrix(teams.length, graphs.length);
 
-            var TScore = db.collection('TScore');
-            var r1scores = {};
-            var r2scores = {};
-            var r3scores = {};
-
-            TScore.find({}).each(function(err, ent) {
-              if (err) {
-                return next(err);
-              }
-              if (ent === null) return;
-              if (ent.round === "round1") {
-                r1scores[ent.team] = ent.score;
-              }
-              if (ent.round === "round2") {
-                r2scores[ent.team] = ent.score;
-              }
-              if (ent.round === "round3") {
-                r3scores[ent.team] = ent.score;
-              }
-            });
-
             // Iterate through all runs
             var runs = db.collection('runs');
-            runs.find({}).each(function(err, doc) {
-              if (err) {
-                return next(err);
-              }
-
-              // Check if have exhausted cursor
-              if (doc === null) {
-                return res.render('graph/dashboard', { matrix: matrix
-                                                     , teams: teams
-                                                     , categories: categories
-                                                     , selfteam: req.user
-                                                     , round1: r1scores
-                                                     , round2: r2scores
-                                                     , round3: r3scores
-                                                     });
-              }
+            runs.find({}).forEach(function (doc) {
 
               var j = invGraphs[doc.graph];
-              doc.teams.forEach(function(team) {
+              doc.teams.forEach(function (team) {
                 var i = invTeams[team];
 
                 if (i !== undefined && j !== undefined) {
@@ -84,16 +50,89 @@ module.exports = exports = function(db) {
                     score = doc.scores[team];
                   }
 
-                  matrix[i][j].push({ id: doc._id
-                                    , teams: doc.teams
-                                    , score: score });
+                  matrix[i][j].push({
+                    id: doc._id
+                    , teams: doc.teams
+                    , score: score
+                  });
                 }
               });
-            });
+            },
+              (err) => {
+                if (err) {
+                  return next(err);
+                } else {
+                  return res.render('graph/dashboard', {
+                    matrix: matrix
+                    , teams: teams
+                    , categories: categories
+                  });
+                }
+              });
           });
         });
       }
 
+      , download: function (req, res, next) {
+        // Get all teams
+        findAllTeams(db, function (err, teams) {
+          if (err) {
+            return next(err);
+          }
+          // Get all graphs, grouped by category
+          getAllCategories(db, function (err, categories) {
+            if (err) {
+              return next(err);
+            }
+
+            var graphs = extractGraphs(categories);
+
+            var invTeams = makeInverse(teams)
+              , invGraphs = makeInverse(graphs);
+
+            // Initialize empty matrix number of teams by number of graphs
+            var matrix = prepareMatrix(teams.length, graphs.length);
+
+            // Iterate through all runs
+            var runs = db.collection('runs');
+            runs.find({}).forEach(function (doc) {
+
+              var j = invGraphs[doc.graph];
+              doc.teams.forEach(function (team) {
+                var i = invTeams[team];
+
+                if (i !== undefined && j !== undefined) {
+                  if (!matrix[i][j]) {
+                    matrix[i][j] = [];
+                  }
+
+                  var score = 0;
+                  if (doc.scores) {
+                    score = doc.scores[team];
+                  }
+
+                  matrix[i][j].push({
+                    id: doc._id
+                    , teams: doc.teams
+                    , score: score
+                  });
+                }
+              });
+            },
+              (err) => {
+                if (err) {
+                  return next(err);
+                } else {
+                  return res.render('graph/download', {
+                    matrix: matrix
+                    , teams: teams
+                    , categories: categories
+                  });
+                }
+              });
+          });
+        });
+      }
     }
   );
 };
@@ -108,18 +147,16 @@ function findAllTeams(db, next) {
   var res = [];
 
   var teams = db.collection('teams');
-  teams.find({}, { sort: 'name' }).each(function(err, doc) {
+  teams.find({}, { sort: 'name' }).forEach((doc) => {
+    res.push(doc.name);
+  }, (err) => {
     if (err) {
       return next(err);
-    }
-
-    // Check if have exhausted cursor
-    if (doc === null) {
+    } else {
       return next(null, res);
     }
-
-    res.push(doc.name);
-  });
+  }
+  );
 };
 
 /**
@@ -132,23 +169,23 @@ function findAllTeams(db, next) {
  */
 function getAllCategories(db, next) {
   var group = { $group: { _id: '$category', graphs: { $push: '$name' } } }
-    , sort = { $sort : { '_id' : 1 } };
+    , sort = { $sort: { '_id': 1 } };
 
   var graphs = db.collection('graphs');
-  graphs.aggregate([ group, sort ], function(err, res) {
-    if (err) {
-      return next(err);
+  var doc = graphs.aggregate([group, sort]);
+  var categories = [];
+  doc.forEach((value) => {
+    var category = { name: value._id, graphs: value.graphs };
+    categories.push(category);
+  },
+    (err) => {
+      if (err) {
+        return next(err);
+      } else {
+        return next(null, categories);
+      }
     }
-
-    var categories = [];
-
-    res.forEach(function(value) {
-      var category = { name: value._id, graphs: value.graphs };
-      categories.push(category);
-    });
-
-    return next(null, categories);
-  });
+  );
 };
 
 /**
@@ -157,8 +194,8 @@ function getAllCategories(db, next) {
 function extractGraphs(categories) {
   var graphs = [];
 
-  categories.forEach(function(value) {
-    graphs.push.apply(graphs,value.graphs);
+  categories.forEach(function (value) {
+    graphs.push.apply(graphs, value.graphs);
   });
 
   return graphs;
@@ -171,7 +208,7 @@ function extractGraphs(categories) {
 function makeInverse(list) {
   var res = {};
 
-  list.forEach(function(value, index) {
+  list.forEach(function (value, index) {
     res[value] = index;
   });
 

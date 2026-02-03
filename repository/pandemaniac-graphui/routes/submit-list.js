@@ -5,37 +5,37 @@
 
 var helpers = require('./submit-helpers');
 
-module.exports = exports = function(db, client) {
+module.exports = exports = function (db, client) {
   helpers = helpers(db);
 
   return (
-    { list: function(req, res, next) {
+    {
+      list: function (req, res, next) {
         // Find all graphs
-        findAllGraphs(db, function(err, graphs) {
+        findAllGraphs(db, function (err, graphs) {
           if (err) {
             return next(err);
           }
 
           // Classify all attempts
           var team = req.user;
-          classifyAllAttempts(db, client, team, function(err, attempts) {
+          classifyAllAttempts(db, client, team, function (err, attempts) {
             if (err) {
               return next(err);
             }
 
             var active = []
               , now = new Date();
-
-            graphs.forEach(function(value) {
-              var graph = attempts[value.name] || { downloaded: false
-                                                  , expired: value.end <= now
-                                                  };
+            graphs.forEach(function (value) {
+              var graph = attempts[value.name] || {
+                downloaded: false
+                , expired: value.end <= now
+              };
               graph.href = value.name;
               graph.text = value.name;
 
               active.push(graph);
             });
-
             return res.render('submit/dashboard', { active: active });
           });
         });
@@ -58,17 +58,14 @@ function findAllGraphs(db, next) {
     , query = { start: { $lt: now } };
 
   var graphs = db.collection('graphs');
-  graphs.find(query, {}, { sort: 'end' }).each(function(err, doc) {
+  graphs.find(query, { sort: 'end' }).forEach((doc) => {
+    res.push(doc);
+  }, (err) => {
     if (err) {
       return next(err);
-    }
-
-    // Check if have exhausted cursor
-    if (doc === null) {
+    } else {
       return next(null, res);
     }
-
-    res.push(doc);
   });
 };
 
@@ -94,35 +91,39 @@ function classifyAllAttempts(db, client, team, next) {
   var query = { team: team };
 
   var attempts = db.collection('attempts');
-  attempts.find(query, function(err, cursor) {
-    function iter(err, doc) {
-      if (err) {
-        return next(err);
-      }
-
-      // Check if have exhausted cursor
-      if (doc === null) {
-        return next(null, res);
-      }
-
-      // Find how much time remains for submission
-      var key = helpers.makeKey(doc.graph, doc.team);
-      client.ttl(key, function(err, ttl) {
-        if (err) {
-          return next(err);
-        }
-
-        res[doc.graph] = classifyAttempt(doc, ttl);
-        return cursor.nextObject(iter);
-      });
-    };
-
+  const cursor = attempts.find(query);
+  function iter(err, doc) {
     if (err) {
       return next(err);
     }
 
-    return cursor.nextObject(iter);
-  });
+    // Check if have exhausted cursor
+    if (doc === null) {
+      return next(null, res);
+    }
+
+    // Find how much time remains for submission
+    var key = helpers.makeKey(doc.graph, doc.team);
+    client.get(key, (err, reply) => {
+      if (err) {
+        return next(err);
+      }
+      if (reply) {
+        client.ttl(key, function (err, ttl) {
+          if (err) {
+            return next(err);
+          }
+          res[doc.graph] = classifyAttempt(doc, ttl);
+          return cursor.next(iter);
+        });
+      } else {
+        res[doc.graph] = classifyAttempt(doc, -2);
+        return cursor.next(iter);
+      }
+    });
+  }
+
+  return cursor.next(iter);
 };
 
 /**
@@ -153,6 +154,5 @@ function classifyAttempt(attempt, ttl) {
   } else if (ttl >= 0) {
     res.expired = false;
   }
-
   return res;
 };

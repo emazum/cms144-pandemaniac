@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  .container
+    h4#instruction= "Instructions"
+    a(href="https://www.youtube.com/watch?v=H2SJQ9q31FM").video_link= "[Video]"
+    ul
+      li= "Scroll your mouse over the graph to zoom in/out, and drag the mouse to pan the graph."
+      li= "Move your mouse over a node to get its ID, its neighbor nodes and which teams have selected it as seed. You can also click on a node to zoom in to it."
+      li= "Click the play button or step forward/back buttons in the bottom to see the iterations. You can also select the game you want to play."
+      li= "Click on the legend of a team on the right side of the graph for highlighting the seed nodes of that team."
+  .spacer30
+  .container
+    .row
+      #chart.col-xs-9
+      #legend.col-xs-3
+  .spacer30
+  .container
+    .col-xs-9
+      .col-sm-4.col-sm-offset-4
+        .input-group.input-group-sm
+          span.input-group-btn
+            button#game-selection.btn.btn-info.btn-sm.dropdown-toggle(data-toggle='dropdown', aria-haspopup="true", aria-expanded="false")
+              span#game-no= "Game 0 "
+              span.caret
+            - var n = 0;
+            ul.dropdown-menu.scrollable-menu.col-xs-3
+              while n < 50
+                li
+                  a(href="#")= "Game " + n++
+
+            button#step-backward.btn.btn-primary(type='button')
+              i.glyphicon.glyphicon-step-backward
+          input#step-no.form-control(type='text', value='0')
+          span.input-group-btn
+            button#play.btn.btn-primary(type='button')
+              i.glyphicon.glyphicon-play
+            button#step-forward.btn.btn-primary(type='button')
+              i.glyphicon.glyphicon-step-forward
+
+append js
+  script(src='/js/d3.min.js')
+  script(src='/js/render-graph.js')
