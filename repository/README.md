@@ -1,9 +1,9 @@
 # Software versions AWS new spin-up
 | Software | Version |
 | -------- | ------- |
-| Ubuntu (running on Amazon EC2) | 20.04 LTS |
+| Ubuntu (running on Amazon EC2) | 22.04 LTS |
 | Redis | 7.0.5 |
-| MongoDB | 6.0.2 |
+| MongoDB | 6.0.27 |
 | node.js | 18.12.0 |
 | npm | 8.19.2 |
 | pymongo | 4.3.2 |

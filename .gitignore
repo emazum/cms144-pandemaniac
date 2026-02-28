@@ -2,3 +2,5 @@ repository/data/db/*
 repository/logs/*
 repository/pandemaniac-graphui/node_modules/*
 repository/db-backups/*
+repository/pandemaniac-graphui/private/runs/*
+redis-7.0.5/*
